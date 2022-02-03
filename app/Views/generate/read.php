@@ -30,10 +30,6 @@
 
     <table width="100%">
         <tr>
-            <td align="left">
-                <img class="img-profile rounded-circle" src="<?= base_url(); ?>/img/logo.png">
-
-            </td>
             <td align="right">
                 <h3>MTSN 3 Jakarta Selatan</h3>
                 <pre>
