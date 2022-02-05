@@ -43,6 +43,7 @@ class Pembayaran extends BaseController
         $data['name'] = $query2->getResultArray();
         return view('/transaksi/index', $data);
     }
+
     public function readpembayaran()
     {
 
@@ -160,6 +161,98 @@ class Pembayaran extends BaseController
         ]);
 
         session()->setFlashdata('pesan', 'data  berhasil di tambahkan');
+
+        return redirect()->to('/pembayaran/readpembayaran/');
+    }
+    public function editpembayaran($pembayaran)
+    {
+
+
+        $data = [
+            'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
+            'validation' => \Config\Services::validation(),
+            'home' => $this->PembayaranModel->getPembayaran($pembayaran),
+            'spp' => $this->SppModel->getspp(),
+            'nisn' => $this->SiswaModel->getSiswa(),
+            'bulan' => $this->BulanModel->getBulan(),
+            'status' => $this->StatusModel->getstatus(),
+        ];
+        $this->builder = $this->db->table('users');
+        $this->builder->select('users.id as id_user ,username');
+        $this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+        $this->builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+        $this->builder->where('auth_groups.id !=', 3);
+        $query = $this->builder->get();
+
+        $data['users'] = $query->getResultArray();
+
+        $this->builder = $this->db->table('users');
+        $this->builder->select('users.id as id_user , username, fullname');
+        $this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+        $this->builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+        $this->builder->where('auth_groups.id', 3);
+        $query2 = $this->builder->get();
+
+        $data['name'] = $query2->getResultArray();
+        return view('/transaksi/edit', $data);
+    }
+    public function updatepembayaran($pembayaran)
+    {
+        // validation
+        $jumlah = $this->request->getVar('jumlah_bayar');
+        $jumbar = str_replace('.', '', $jumlah);
+
+        // validasi input 
+        if (!$this->validate([
+            'nisn' => [
+                'rules' => 'required|integer',
+                'errors' => [
+                    'required' => '{field}  wajib di isi!!',
+                    'integer' => '{field}  harus berupa angka!!',
+                ]
+            ],
+            'bln_bayar' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field}  wajib di isi!!',
+                ]
+            ],
+            'thn_bayar' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field}  wajib di isi!!',
+                ]
+            ],
+            'jumlah_bayar' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field}  wajib di isi!!',
+                ]
+            ],
+        ])) {
+
+            // $validation = \Config\Services::validation();
+            // return redirect()->to('/home/edit/' . $this->request->getVar('id'))->withInput()->with('validation', $validation);
+            return redirect()->to('/pembayaran/editpembayaran/' . $this->request->getVar('id_pembayaran'))->withInput();
+        }
+
+        // input/output
+        $this->PembayaranModel->save([
+            'id_pembayaran' => $pembayaran,
+            'id' => $this->request->getVar('id'),
+            'siswa' => $this->request->getVar('siswa'),
+            'nisn' => $this->request->getVar('nisn'),
+            'tgl_bayar' => $this->request->getVar('tgl_bayar'),
+            'bln_bayar' => $this->request->getVar('bln_bayar'),
+            'thn_bayar' => $this->request->getVar('thn_bayar'),
+            'id_spp' => $this->request->getVar('id_spp'),
+            'jumlah_bayar' => $jumbar,
+            'id_status' => $this->request->getVar('id_status')
+
+        ]);
+        // Flashdata 
+
+        session()->setFlashdata('pesan', 'data pembayaran berhasil di ubah');
 
         return redirect()->to('/pembayaran/readpembayaran/');
     }

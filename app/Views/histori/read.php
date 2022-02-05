@@ -44,6 +44,7 @@
                                 <th scope="col">nominal</th>
                                 <th scope="col">jumlah pembayaran</th>
                                 <th scope="col">Keterangan</th>
+                                <th scope="col">Detail</th>
 
                             </tr>
                         </thead>
@@ -65,7 +66,11 @@
                                     <?php else : ?>
                                         <td><button class="btn btn-warning"><?= $a['status_pembayaran']; ?></button></td>
                                     <?php endif; ?>
-
+                                    <td>
+                                        <form action="/pembayaran/editpembayaran/<?= $a['id_pembayaran']; ?>" method="post">
+                                            <button class="btn btn-success"><i class="fas fa-arrow-right"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
