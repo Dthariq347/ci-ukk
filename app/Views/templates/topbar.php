@@ -40,13 +40,16 @@
                 <img class="img-profile rounded-circle" src="<?= base_url(); ?>/img/<?= user()->userr_image; ?>">
             </a>
             <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="<?= base_url() ?>/login/admin">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Dashboard
-                </a>
+            <?php if (in_groups('siswa')) : ?>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="<?= base_url() ?>/details/index">
 
-            </div>
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        User Profile
+                    </a>
+
+                </div>
+            <?php endif; ?>
         </li>
 
     </ul>
