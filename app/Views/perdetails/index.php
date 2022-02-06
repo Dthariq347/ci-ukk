@@ -192,12 +192,9 @@
                             </div>
                             <div class="card-body">
                                 <form action="https://portal.ltmpt.ac.id/account/update/account" method="POST" id="account_form">
-                                    <div class="form-group row">
 
-                                        <div class="col-lg-7">
-                                            <div class="form-control-plaintext"> <img class="img-profile rounded-circle w-25 p-3" src="<?= base_url(); ?>/img/<?= user()->userr_image; ?>"></div>
-                                        </div>
-                                    </div>
+                                    <img class="img-profile rounded-circle w-25 p-3" src="<?= base_url(); ?>/img/<?= user()->userr_image; ?>">
+
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label text-right d-none d-sm-block">Email Siswa</label>
                                         <label class="col-lg-3 col-form-label text-left d-sm-none">Email Siswa</label>
