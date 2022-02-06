@@ -1,102 +1,264 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="no-focus">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Personal Portfolio Webpage</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/style.css">
+    <title><?= $title; ?></title>
 
+    <meta name="description" content="Portal LTMPT">
+    <meta name="author" content="LTMPT">
+    <meta name="robots" content="noindex, nofollow">
+
+
+
+    <!-- Fonts and Codebase framework -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
+    <link href="https://portal.ltmpt.ac.id/assets/plugins/bootstrap5/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" id="css-main" href="https://portal.ltmpt.ac.id/assets/css/codebase.css">
+    <link href="https://portal.ltmpt.ac.id/assets/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+    <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+    <link rel="stylesheet" id="css-theme" href="https://portal.ltmpt.ac.id/assets/css/themes/corporate.min.css">
+    <link rel="stylesheet" href="https://portal.ltmpt.ac.id/assets/plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://portal.ltmpt.ac.id/assets/plugins/cropperjs/dist/cropper.css">
+    <script src="<?= base_url(); ?>/fontawesome-free-6.0.0-beta3-web/js/all.min.js" crossorigin="anonymous"></script>
+    <!-- END Stylesheets -->
+
+    <style>
+        .btn-primary:focus,
+        .btn-primary:active {
+            background: #204B87 !important;
+        }
+
+        .btn-outline-primary {
+            border: black 1px solid;
+            color: black;
+            background: transparent;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:active {
+            background: #32CD32;
+            color: #fff;
+        }
+
+
+        .text-primary.text-white-hover:hover {
+            color: #fff !important;
+        }
+
+        .impersonating {
+            padding: 10px;
+            background-color: #fff;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            /*border-bottom: 1px solid #204B87;*/
+        }
+
+
+        .pic-container {
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .pic-container.pic-medium {
+            width: 96px;
+            height: 96px;
+        }
+
+        .pic-container.pic-circle {
+            border-radius: 50%;
+        }
+
+        .pic-overlay {
+            background-color: #ccc;
+            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            position: relative;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .pic-container:hover .pic-overlay {
+            top: -100%;
+        }
+
+        .pic-overlay a {
+            display: block;
+            padding: 10px;
+        }
+
+        .pic-xs .pic-overlay a {
+            padding: 5px;
+        }
+
+        .info-tooltip {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 5px;
+            margin-right: 10px;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px
+        }
+
+        .btn-outline-danger {
+            color: #ef5350;
+            background-color: transparent;
+            background-image: none;
+            border-color: #ef5350;
+        }
+
+        button.swal2-cancel.swal2-styled {
+            border: #204B87 1px solid !important;
+            color: #204B87 !important;
+            background: transparent !important;
+        }
+
+        button.swal2-cancel.swal2-styled:hover,
+        button.swal2-cancel.swal2-styled:focus {
+            border: #204B87 1px solid !important;
+            background: #204B87 !important;
+            color: #fff !important;
+        }
+
+        .nav-main-header a.active,
+        .nav-main-header a:focus,
+        .nav-main-header a:hover,
+        .nav-main-header li.open>a.nav-submenu,
+        .nav-main-header li:hover>a.nav-submenu {
+            color: #fff;
+            background-color: #204B87;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://portal.ltmpt.ac.id/assets/plugins/bootstrap-pin-code/css/bootstrap-pincode-input.css">
+    <link rel="stylesheet" href="https://portal.ltmpt.ac.id/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="https://portal.ltmpt.ac.id/assets/plugins/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>/css/profile.css">
+
+    <style>
+        .input-group {
+            padding-top: 6px !important;
+        }
+    </style>
 
 </head>
 
 <body>
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
-    </link>
-    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css">
-    </link>
-    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
-    </link>
 
-    <div class="container-fluid">
-        <div id="home-page" class="home-page">
-            <div class="box row">
-                <div class="col-xs-6">
-                    <h1>Eesha Moona<h2><i>"Hi! I am going to be a junior at Monta Vista High School. My interests include dancing, acting, speech, and (of course) coding. Advanced at Java, I am now working at expanding my skills in front end development in hopes to create some amazing projects!" </i></h2>
-                    </h1>
+    <div id="page-container" class="sidebar-inverse side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed">
+
+
+        <main id="main-container" class="bg-white ">
+
+
+            <!-- Header -->
+            <div class="content content-top">
+                <div class="row push">
+                    <div class="col-md py-10 d-md-flex align-items-md-center text-center">
+                        <h2 class="mb-0">Profile Siswa</h2>
+                    </div>
+                    <div class="col-md py-10 d-md-flex align-items-md-center justify-content-md-end text-center">
+                        <a href="<?= base_url('siswa'); ?>" class="btn btn-success btn-outline-success">
+                            <i class="fa fa-arrow-circle-left mr-5"></i>Back to dashboard </a>
+                    </div>
                 </div>
-                <div class="col-xs-6">
-                    <img class="smaller-image" src="http://jurislink.com/admin/images/057fe2be90920c0003007f185951db1e.jpeg" alt="Lucille Ball Portrait "> </img>
-                </div>
             </div>
-        </div>
-        <div id="project-page" class="project-page">
-            <div class="container-fluid">
-                <h3 class="text-center">Project Page</h3>
-                <ul class="grid">
-                    <li>
-                        <img src="http://qlip.in/images/YMCA-Realtor-Donation-3.jpg" alt=''></img>
-                    </li>
-                    <li>
-                        <img src="http://qlip.in/images/webcaballero.jpg" alt=''></img>
-                    </li>
-                    <li>
-                        <img src="http://qlip.in/images/webmarqas.jpg" alt=''></img>
-                    </li>
-                    <li>
-                        <img src="http://qlip.in/images/panacea1.jpg" alt=''></img>
-                    </li>
-                    <li>
-                        <img src="http://qlip.in/images/webbrandaxis.jpg" alt=''></img>
-                    </li>
-            </div>
-        </div>
-        <div id="contact-page" class="contact-page">
-            <div class=" box-3 container-fluid">
-                <h3 class="text-center">Contact Page</h3>
-                <input type="text" placeholder="Name" required>
-                <input type="text" placeholder="Email Adress" required>
-                <input type="text" placeholder="Phone Number" required>
-                <input type="text" placeholder="Message" required>
-                <button type="submit">Submit</button>
-                </form>
-                <p></p>
-                <p> <i>Want to Contact Me? Fill Out the Form and I will get back to you ASAP! </i></p>
-            </div>
-        </div>
-        <div id="social-page" class="social-page">
-            <div class="box-4 ">
-                <h4> Social Media: </h4>
+            <!-- END Header -->
+
+            <!-- Page Content -->
+            <div class="content">
                 <div class="row">
-                    <div class="col-xs-4">
-                        <form action="https://www.linkedin.com/in/eesha-moona-376b0313b/">
-                            <button class="btn btn-block btn-info"><i class="fa fa-linkedin" aria-hidden="true"></i>LinkedIn</button>
-                        </form>
+
+                    <div class="col-md-7 col-xl-12 ">
+                        <!-- Akun -->
+                        <div class="card border-success">
+                            <div class="card-header bg-white border-success">
+                                <h3 class="block-title">Account</h3>
+                            </div>
+                            <div class="card-body">
+                                <form action="https://portal.ltmpt.ac.id/account/update/account" method="POST" id="account_form">
+                                    <div class="form-group row">
+
+                                        <div class="col-lg-7">
+                                            <div class="form-control-plaintext"> <img class="img-profile rounded-circle w-25 p-3" src="<?= base_url(); ?>/img/<?= user()->userr_image; ?>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right d-none d-sm-block">Email Siswa</label>
+                                        <label class="col-lg-3 col-form-label text-left d-sm-none">Email Siswa</label>
+                                        <div class="col-lg-7">
+                                            <div class="form-control-plaintext"><?= user()->email; ?><span data-toggle="tooltip" data-placement="top" title="Verified">
+                                                    <i class="fa fa-check-circle text-success"></i>
+                                                </span></div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right d-none d-sm-block" for="locale">
+                                            Language </label>
+                                        <label class="col-lg-3 col-form-label text-left d-sm-none" for="locale">Language</label>
+                                        <div class="col-lg-7">
+                                            <select class="form-control" id="locale" name="locale">
+                                                <option value="id-ID" selected>ID</option>
+                                                <option value="en-US">EN</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-xs-4">
-                        <form action="https://github.com/eeshamoona?tab=overview&from=2017-06-27">
-                            <button class="btn btn-block btn-info"><i class="fa fa-github" aria-hidden="true"></i> GitHub</button>
-                        </form>
-                    </div>
-                    <div class="col-xs-4">
-                        <form action="https://www.facebook.com/profile.php?id=100010340494328">
-                            <button class="btn btn-block btn-info"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</button>
-                        </form>
-                    </div>
+
+
+
+
+
+
+        </main>
+        <!-- END Main Container -->
+
+        <!-- Footer -->
+        <footer id="page-footer" class="bg-white ">
+            <div class="content py-15 font-size-xs clearfix">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; <?= date('h') ?> by: dzaky abiyyu thariq</span> <br>
+                    <span>Version 1.0</span>
                 </div>
             </div>
-        </div>
-        <div class="navbar row">
-            <div class="col-xs-4">
-                <a href="#contact-page" class="button">Contact</a>
-                <a href="#project-page" class="button">Projects</a>
-                <a href="#home-page" class="button">Home</a>
-            </div>
-        </div>
+        </footer>
+        <!-- END Footer -->
     </div>
+    <!-- END Page Container -->
+
+
+    <script src="<?= base_url(); ?>/js/codebase2.core.min.js"></script>
+
+    <script src="<?= base_url(); ?>/js/codebase.core.min.js"></script>
+
+
+
+
+
+
+
 
 
 </body>
