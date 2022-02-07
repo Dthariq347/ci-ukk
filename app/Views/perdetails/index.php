@@ -169,10 +169,10 @@
             <!-- Header -->
             <div class="content content-top">
                 <div class="row push">
-                    <div class="col-md py-10 d-md-flex align-items-md-center text-center">
-                        <h2 class="mb-0">Profile Siswa</h2>
+                    <div class="col-md d-md-flex align-items-md-center text-center">
+                        <h1 class="mb-0">PROFILE SISWA</h1>
                     </div>
-                    <div class="col-md py-10 d-md-flex align-items-md-center justify-content-md-end text-center">
+                    <div class="col-md d-md-flex align-items-md-center justify-content-md-end text-center">
                         <a href="<?= base_url('siswa'); ?>" class="btn btn-success btn-outline-success">
                             <i class="fa fa-arrow-circle-left mr-5"></i>Back to dashboard </a>
                     </div>
@@ -181,54 +181,84 @@
             <!-- END Header -->
 
             <!-- Page Content -->
-            <div class="content">
+
+            <div class="container">
                 <div class="row">
 
                     <div class="col-md-7 col-xl-12 ">
                         <!-- Akun -->
+
                         <div class="card border-success">
                             <div class="card-header bg-white border-success">
-                                <h3 class="block-title">Account</h3>
+                                <h2 class="block-title">Account</h2>
                             </div>
                             <div class="card-body">
-                                <form action="https://portal.ltmpt.ac.id/account/update/account" method="POST" id="account_form">
-
-                                    <img class="img-profile rounded-circle w-25 p-3" src="<?= base_url(); ?>/img/<?= user()->userr_image; ?>">
-
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label text-right d-none d-sm-block">Email Siswa</label>
-                                        <label class="col-lg-3 col-form-label text-left d-sm-none">Email Siswa</label>
-                                        <div class="col-lg-7">
-                                            <div class="form-control-plaintext"><?= user()->email; ?><span data-toggle="tooltip" data-placement="top" title="Verified">
-                                                    <i class="fa fa-check-circle text-success"></i>
-                                                </span></div>
-
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card border-0">
+                                            <div class="card-body">
+                                                <center><img class="img-profile rounded-circle w-50 p-2" src="<?= base_url(); ?>/img/<?= user()->userr_image; ?>"></center>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-6">
+                                        <div class="card border-success">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Fullname Siswa</label>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-control-plaintext"><?= user()->fullname; ?><span data-toggle="tooltip">
 
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label text-right d-none d-sm-block" for="locale">
-                                            Language </label>
-                                        <label class="col-lg-3 col-form-label text-left d-sm-none" for="locale">Language</label>
-                                        <div class="col-lg-7">
-                                            <select class="form-control" id="locale" name="locale">
-                                                <option value="id-ID" selected>ID</option>
-                                                <option value="en-US">EN</option>
-                                            </select>
+                                                            </span></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Email Siswa</label>
+                                                    <div class="col-lg-5">
+                                                        <div class="form-control-plaintext"><?= user()->email; ?><span data-toggle="tooltip" data-placement="top" title="Verified">
+                                                                <i class="fa fa-check-circle text-success"></i>
+                                                            </span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Username Siswa</label>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-control-plaintext"><?= user()->username; ?><span data-toggle="tooltip">
+
+                                                            </span></div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">NISN Siswa</label>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-control-plaintext">
+                                                            <p></p><span data-toggle="tooltip">
+
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Kelas Siswa</label>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-control-plaintext">
+                                                            <p></p><span data-toggle="tooltip">
+
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
-
-                                </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
-
-
-
-
         </main>
         <!-- END Main Container -->
 

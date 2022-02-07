@@ -14,7 +14,13 @@ class Details extends BaseController
     {
         $data = [
             'title' => 'login | MTSN 3 Jakarta Selatan',
+            // 'read' => $this->PembayaranModel
+            //     ->select('*')
+            //     ->join('users', 'users.id = pembayaran.id AND users.id = pembayaran.siswa', 'left')
+            //     ->join('siswa', 'siswa.nisn = pembayaran.nisn')->find()
         ];
+
+
         return view('perdetails/index', $data);
     }
 

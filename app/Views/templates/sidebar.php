@@ -119,7 +119,7 @@
         <hr class="sidebar-divider my-0">
         <li class="nav-item">
             <a class="nav-link" href="/Pembayaran/readpembayaran">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-history"></i>
                 <span>History Pembayaran</span></a>
         </li>
 
