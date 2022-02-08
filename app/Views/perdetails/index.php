@@ -185,7 +185,7 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-md-7 col-xl-12 ">
+                    <div class="col-md-7 col-xl-12">
                         <!-- Akun -->
 
                         <div class="card border-success">
@@ -193,7 +193,7 @@
                                 <h2 class="block-title">Account</h2>
                             </div>
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row mb-6">
                                     <div class="col-sm-6">
                                         <div class="card border-0">
                                             <div class="card-body">
@@ -201,57 +201,36 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="card border-success">
+                                    <div class="col-sm-6 m-auto">
+                                        <div class="card col d-flex justify-content-center border-success">
                                             <div class="card-body">
                                                 <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Fullname Siswa</label>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-control-plaintext"><?= user()->fullname; ?><span data-toggle="tooltip">
-
-                                                            </span></div>
+                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Nama Lengkap</label>
+                                                    <div class="col-lg-8">
+                                                        <div class="input-group input-group-lg">
+                                                            <input type="text" class="form-control input-lg" value="<?= user()->fullname; ?>" readonly>
+                                                        </div>
                                                     </div>
+
                                                 </div>
 
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Email Siswa</label>
-                                                    <div class="col-lg-5">
-                                                        <div class="form-control-plaintext"><?= user()->email; ?><span data-toggle="tooltip" data-placement="top" title="Verified">
-                                                                <i class="fa fa-check-circle text-success"></i>
-                                                            </span></div>
+                                                    <div class="col-lg-8">
+                                                        <div class="input-group input-group-lg">
+                                                            <input type="text" class="form-control input-lg" value="<?= user()->email; ?>" readonly>
+                                                        </div>
                                                     </div>
+
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Username Siswa</label>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-control-plaintext"><?= user()->username; ?><span data-toggle="tooltip">
-
-                                                            </span></div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">NISN Siswa</label>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-control-plaintext">
-                                                            <p></p><span data-toggle="tooltip">
-
-                                                            </span>
+                                                    <div class="col-lg-8">
+                                                        <div class="input-group input-group-lg">
+                                                            <input type="text" class="form-control input-lg" value="<?= user()->username; ?>" readonly>
                                                         </div>
-
                                                     </div>
 
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Kelas Siswa</label>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-control-plaintext">
-                                                            <p></p><span data-toggle="tooltip">
-
-                                                            </span>
-                                                        </div>
-
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -259,6 +238,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
         </main>
         <!-- END Main Container -->
 
