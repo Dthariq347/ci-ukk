@@ -66,5 +66,7 @@ class BaseController extends Controller
         $this->BulanModel = new \App\Models\BulanModel();
 
         $this->StatusModel = new \App\Models\StatusModel();
+
+        $this->NilaiModel = new \App\Models\NilaiModel();
     }
 }
