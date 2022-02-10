@@ -12,18 +12,46 @@ class Pembayaran extends BaseController
         $this->db = \Config\Database::connect();
     }
 
-    public function index()
+    public function search()
     {
 
         $data = [
             'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
             'validation' => \Config\Services::validation(),
+            'nisn' => $this->SiswaModel->getSiswa()
+        ];
+        return view('/transaksi/search', $data);
+    }
+    public function index()
+    {
+        $search = $this->request->getVar('nisn');
+        $carisiswa = $this->SiswaModel->find($search);
+        $nilai = $this->NilaiModel->where('nisn', $search)->find();
+
+        $tahun = date('Y');
+        $date = $this->SppModel->where('tahun', $tahun)->find();
+        $datetime = $date[0]['nominal'];
+        $datetime1 = $date[0]['tahun'];
+
+        // if ($datetime - $nilai) {
+        //     $nominal_lebih = $datetime - $nilai;
+        // }
+        // if ($datetime + $nilai) {
+        //     $nominal_kurang = $datetime + $nilai;
+        // }
+
+        $data = [
+            'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
+            'validation' => \Config\Services::validation(),
             'home' => $this->PembayaranModel->getPembayaran(),
-            'spp' => $this->SppModel->getspp(),
-            'nisn' => $this->SiswaModel->getSiswa(),
+            'spp' => $datetime,
+            'spp1' => $datetime1,
+            'nisn' => $carisiswa,
             'bulan' => $this->BulanModel->getBulan(),
             'status' => $this->StatusModel->getstatus(),
+            'nilai' => $nilai
         ];
+
         $this->builder = $this->db->table('users');
         $this->builder->select('users.id as id_user ,username');
         $this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
@@ -147,6 +175,8 @@ class Pembayaran extends BaseController
             return redirect()->to('/pembayaran/index/')->withInput();
         }
 
+
+
         $this->PembayaranModel->save([
             'id' => $this->request->getVar('id'),
             'siswa' => $this->request->getVar('siswa'),
@@ -159,6 +189,30 @@ class Pembayaran extends BaseController
             'id_status' => $this->request->getVar('id_status')
 
         ]);
+
+        $sppmodel = $this->SppModel->find($this->request->getVar('id_spp'));
+        $apa = $sppmodel['nominal'];
+        $lebih_jumbar = NULL;
+        $kurang_jumbar = NULL;
+        if ($jumbar >= $apa) {
+            $lebih_jumbar = $jumbar - $apa;
+        }
+        if ($jumbar <= $apa) {
+            $kurang_jumbar = $apa - $jumbar;
+        }
+        $nilai = [
+            'nisn' => $this->request->getVar('nisn'),
+            'nominal_lebih' => $lebih_jumbar,
+            'nominal_kurang' => $kurang_jumbar
+
+        ];
+        $this->NilaiModel->insert($nilai);
+        // $spp = $this->PembayaranModel->save(['id_spp' => $this->request->getVar('id_spp')]);
+
+        // if ($spp >= $jumlah_bayarr) {
+        // }
+
+
 
         session()->setFlashdata('pesan', 'data  berhasil di tambahkan');
 

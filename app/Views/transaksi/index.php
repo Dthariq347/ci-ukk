@@ -43,18 +43,11 @@
                 <?php endforeach; ?>
             </select>
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="nisn">Fullname Siswa</label>
-            </div>
-            <select class="selectpicker border <?= ($validation->hasError('nisn')) ? 'is-invalid' : ''; ?>" data-width="100%" id="nisn" name="nisn" value="<?= old('nisn'); ?>" value="<?= old('nisn'); ?>" data-live-search="true" title="Fullname Siswa....">
-                <?php foreach ($nisn as $s) : ?>
-                    <option data-subtext="(<?= $s['nis']; ?>)" value="<?= $s['nisn']; ?>"> <?= $s['nama']; ?> </option>
-                <?php endforeach; ?>
-            </select>
-            <div class="invalid-feedback">
-                <?= $validation->getError('nisn'); ?>
-            </div>
+
+        <div class="form-group">
+            <label for="nisn">Nama Siswa</label>
+            <input type="text" name="nisn" class="form-control" id="nisn" value="<?= $nisn['nama']; ?>" placeholder="tulis Tanggal bayar anda" readonly>
+
         </div>
         <div class="form-group">
             <label for="tgl_bayar">Tanggal bayar</label>
@@ -82,16 +75,25 @@
             </div>
 
         </div>
+        <div class="form-group">
+            <label for="id_spp">Nominal SPP</label>
+            <input type="text" name="id_spp" class="form-control <?= ($validation->hasError('id_spp')) ? 'is-invalid' : ''; ?> " id="id_spp" value="<?= $spp; ?>" placeholder="tulis Jumlah Bayar Siswa" readonly>
 
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="id_spp">Nominal SPP</label>
-            </div>
-            <select class="selectpicker border " data-width="100%" id="id_spp" name="id_spp" value="<?= old('id_spp'); ?>" value="<?= old('id_spp'); ?>" title="Nominal SPP Siswa">
-                <?php foreach ($spp as $s) : ?>
-                    <option data-subtext="(<?= $s['tahun']; ?>)" value="<?= $s['id_spp']; ?>"> Rp<?= $s['nominal']; ?> </option>
-                <?php endforeach; ?>
-            </select>
+        </div>
+        <div class="form-group">
+            <label for="nominal_lebih">Nominal Lebih</label>
+            <input type="text" name="nominal_lebih" class="form-control <?= ($validation->hasError('nominal_lebih')) ? 'is-invalid' : ''; ?> " id="nominal_lebih" value="<?= $nilai[0]['nominal_lebih']; ?>" placeholder="tulis Jumlah Bayar Siswa" readonly>
+
+        </div>
+        <div class="form-group">
+            <label for="nominal_kurang">Nominal Kurang</label>
+            <input type="text" name="nominal_kurang" class="form-control <?= ($validation->hasError('nominal_kurang')) ? 'is-invalid' : ''; ?> " id="nominal_kurang" value="<?= $nilai[0]['nominal_kurang']; ?>" placeholder="0" readonly>
+
+        </div>
+        <div class="form-group">
+            <label for="di_bayar">Yang Harus Dibayar</label>
+            <input type="text" name="di_bayar" class="form-control <?= ($validation->hasError('di_bayar')) ? 'is-invalid' : ''; ?> " id="di_bayar" value="<?= $nilai[0]['nominal_kurang']; ?>" placeholder="" readonly>
+
         </div>
         <div class="form-group">
             <label for="jumlah_bayar">Jumlah Bayar</label>
@@ -101,11 +103,12 @@
             </div>
 
         </div>
+
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="id_status">Status</label>
             </div>
-            <select class="selectpicker border " data-width="100%" id="id_status" name="id_status" value="<?= old('id_status'); ?>" value="<?= old('id_status'); ?>" title="Nominal SPP Siswa">
+            <select class="selectpicker border " data-width="100%" id="id_status" name="id_status" value="<?= old('id_status'); ?>" value="<?= old('id_status'); ?>" title="Status Transaksi">
                 <?php foreach ($status as $s) : ?>
                     <option value="<?= $s['id_status']; ?>"><?= $s['status_pembayaran']; ?> </option>
                 <?php endforeach; ?>

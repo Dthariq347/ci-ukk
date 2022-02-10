@@ -24,7 +24,7 @@
             <div class="input-group-prepend">
                 <label class="input-group-text" for="id">Nama Petugas</label>
             </div>
-            <select class="selectpicker border " data-width="100%" id="id" name="id" data-live-search="true">
+            <select class="selectpicker border" data-width="100%" id="id" name="id" data-live-search="true">
                 <?php foreach ($users as $s) : ?>
                     <option value="<?= $s['id_user']; ?>" <?= ($s['id_user'] == old('id') || ($home['id'] == $s['id_user'])) ? 'selected' : '' ?>> <?= $s['username']; ?> </option>
                 <?php endforeach; ?>
@@ -115,7 +115,9 @@
                 <?php endforeach; ?>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Edit</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block">Submit</button>
+        </div>
     </form>
     <?= $this->endSection(); ?>
 </body>
