@@ -184,61 +184,85 @@
 
             <div class="container">
                 <div class="row">
+                    <div class="card border-success">
+                        <div class="card-header bg-white border-success">
+                            <h2 class="block-title">Account</h2>
+                        </div>
 
-                    <div class="col-md-7 col-xl-12">
-                        <!-- Akun -->
-
-                        <div class="card border-success">
-                            <div class="card-header bg-white border-success">
-                                <h2 class="block-title">Account</h2>
-                            </div>
-                            <div class="card-body">
-                                <div class="row mb-6">
-                                    <div class="col-sm-6">
-                                        <div class="card border-0">
-                                            <div class="card-body">
-                                                <center><img class="img-profile rounded-circle w-50 p-2" src="<?= base_url(); ?>/img/<?= user()->userr_image; ?>"></center>
-                                            </div>
+                        <div class="card-body">
+                            <div class="row mb-6">
+                                <div class="col-sm-6">
+                                    <div class="card border-0">
+                                        <div class="card-body">
+                                            <center><img class="img-profile rounded-circle w-50 p-2" src="<?= base_url(); ?>/img/<?= user()->userr_image; ?>"></center>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 m-auto">
-                                        <div class="card col d-flex justify-content-center border-success">
-                                            <div class="card-body">
-                                                <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Nama Lengkap</label>
-                                                    <div class="col-lg-8">
-                                                        <div class="input-group input-group-lg">
-                                                            <input type="text" class="form-control input-lg" value="<?= user()->fullname; ?>" readonly>
-                                                        </div>
+                                </div>
+                                <div class="col-sm-6 m-auto">
+                                    <div class="card col d-flex justify-content-center border-success">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Nama Lengkap</label>
+                                                <div class="col-lg-8">
+                                                    <div class="input-group input-group-lg">
+                                                        <input type="text" class="form-control input-lg" value="<?= user()->fullname; ?>" readonly>
                                                     </div>
-
                                                 </div>
 
-                                                <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Email Siswa</label>
-                                                    <div class="col-lg-8">
-                                                        <div class="input-group input-group-lg">
-                                                            <input type="text" class="form-control input-lg" value="<?= user()->email; ?>" readonly>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Username Siswa</label>
-                                                    <div class="col-lg-8">
-                                                        <div class="input-group input-group-lg">
-                                                            <input type="text" class="form-control input-lg" value="<?= user()->username; ?>" readonly>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
                                             </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Email Siswa</label>
+                                                <div class="col-lg-8">
+                                                    <div class="input-group input-group-lg">
+                                                        <input type="text" class="form-control input-lg" value="<?= user()->email; ?>" readonly>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Username Siswa</label>
+                                                <div class="col-lg-8">
+                                                    <div class="input-group input-group-lg">
+                                                        <input type="text" class="form-control input-lg" value="<?= user()->username; ?>" readonly>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <form action="/details/savepassword/<?= user()->id; ?>" method="post" style="padding: 20px;" enctype="multipart/form-data">
+
+                                                <?= csrf_field(); ?>
+                                                <?php if (session()->getFlashdata('pesan')) : ?>
+                                                    <div class="alert alert-success" role="alert">
+                                                        <?= session()->getFlashdata('pesan'); ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <div class="col-sm-10">
+                                                    <input type="hidden" name="id" value="<?= old('id'); ?>">
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Ganti Password</label>
+                                                    <div class="col-lg-8">
+                                                        <div class="input-group input-group-lg">
+                                                            <input type="password" name="password_hash" class="form-control <?= ($validation->hasError('password_hash')) ? 'is-invalid' : ''; ?> " id="password_hash" value="<?= old('password_hash'); ?>" placeholder="tulis password lengkap">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-lg-3 ml-auto">
+                                                        <button type="submit" class="btn btn-success" id="btn-submit">
+                                                            <i class="fa fa-save mr-5"></i> Save </button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
         </main>
         <!-- END Main Container -->
 
