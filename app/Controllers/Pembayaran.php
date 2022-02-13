@@ -22,55 +22,109 @@ class Pembayaran extends BaseController
         ];
         return view('/transaksi/search', $data);
     }
+
+
     public function index()
     {
         $search = $this->request->getVar('nisn');
         $carisiswa = $this->SiswaModel->find($search);
+
         $nilai = $this->NilaiModel->where('nisn', $search)->find();
 
         $tahun = date('Y');
         $date = $this->SppModel->where('tahun', $tahun)->find();
-        $datetime = $date[0]['nominal'];
-        $datetime1 = $date[0]['tahun'];
 
-        // if ($datetime - $nilai) {
-        //     $nominal_lebih = $datetime - $nilai;
-        // }
-        // if ($datetime + $nilai) {
-        //     $nominal_kurang = $datetime + $nilai;
-        // }
 
-        $data = [
-            'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
-            'validation' => \Config\Services::validation(),
-            'home' => $this->PembayaranModel->getPembayaran(),
-            'spp' => $datetime,
-            'spp1' => $datetime1,
-            'nisn' => $carisiswa,
-            'bulan' => $this->BulanModel->getBulan(),
-            'status' => $this->StatusModel->getstatus(),
-            'nilai' => $nilai
-        ];
+        $id_spp = $date[0]['id_spp'];
+        $nominal = $date[0]['nominal'];
 
-        $this->builder = $this->db->table('users');
-        $this->builder->select('users.id as id_user ,username');
-        $this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
-        $this->builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
-        $this->builder->where('auth_groups.id !=', 3);
-        $query = $this->builder->get();
+        // $nilai_lebih = $nilai[0]['nominal_lebih'];
+        // $nilai_kurang = $nilai[0]['nominal_kurang'];
 
-        $data['users'] = $query->getResultArray();
 
-        $this->builder = $this->db->table('users');
-        $this->builder->select('users.id as id_user , username, fullname');
-        $this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
-        $this->builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
-        $this->builder->where('auth_groups.id', 3);
-        $query2 = $this->builder->get();
 
-        $data['name'] = $query2->getResultArray();
-        return view('/transaksi/index', $data);
+
+
+
+        if ($nilai == NULL) {
+            $data = [
+                'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
+                'validation' => \Config\Services::validation(),
+                'home' => $this->PembayaranModel->getPembayaran(),
+                'id_spp' => $id_spp,
+                'nominal' => $nominal,
+                'nisn' => $carisiswa,
+                'bulan' => $this->BulanModel->getBulan(),
+                'status' => $this->StatusModel->getstatus(),
+            ];
+            $this->builder = $this->db->table('users');
+            $this->builder->select('users.id as id_user ,username');
+            $this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+            $this->builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+            $this->builder->where('auth_groups.id !=', 3);
+            $query = $this->builder->get();
+
+            $data['users'] = $query->getResultArray();
+
+            $this->builder = $this->db->table('users');
+            $this->builder->select('users.id as id_user , username, fullname');
+            $this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+            $this->builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+            $this->builder->where('auth_groups.id', 3);
+            $query2 = $this->builder->get();
+
+            $data['name'] = $query2->getResultArray();
+            return view('/transaksi/index2', $data);
+        } else {
+            if ($nilai[0]['nisn'] != NULL) {
+                $nilai_lebih = $nilai[0]['nominal_lebih'];
+                $nilai_kurang = $nilai[0]['nominal_kurang'];
+                if ($nominal - $nilai_lebih) {
+                    $nominal_bayar = $nominal - $nilai_lebih;
+                } else {
+                    if ($nominal + $nilai_kurang) {
+                        $nominal_bayar = $nominal + $nilai_kurang;
+                    }
+                }
+
+                $data = [
+                    'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
+                    'validation' => \Config\Services::validation(),
+                    'home' => $this->PembayaranModel->getPembayaran(),
+                    'spp' => $this->SppModel->getspp(),
+                    'nisn' => $this->SiswaModel->getSiswa(),
+                    'id_spp' => $id_spp,
+                    'nominal' => $nominal,
+                    'nisn' => $carisiswa,
+                    'bulan' => $this->BulanModel->getBulan(),
+                    'status' => $this->StatusModel->getstatus(),
+                    'nilai_lebih' => $nilai_lebih,
+                    'nilai_kurang' => $nilai_kurang,
+                    'nominal_bayar' => $nominal_bayar,
+                ];
+
+                $this->builder = $this->db->table('users');
+                $this->builder->select('users.id as id_user ,username');
+                $this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+                $this->builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+                $this->builder->where('auth_groups.id !=', 3);
+                $query = $this->builder->get();
+
+                $data['users'] = $query->getResultArray();
+
+                $this->builder = $this->db->table('users');
+                $this->builder->select('users.id as id_user , username, fullname');
+                $this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+                $this->builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+                $this->builder->where('auth_groups.id', 3);
+                $query2 = $this->builder->get();
+
+                $data['name'] = $query2->getResultArray();
+                return view('/transaksi/index', $data);
+            }
+        }
     }
+
 
     public function readpembayaran()
     {
@@ -137,6 +191,8 @@ class Pembayaran extends BaseController
     }
     public function savepembayaran()
     {
+        $id_nilai = $this->NilaiModel->where('nisn', $this->request->getVar('nisn'))->find();
+
 
         $jumlah = $this->request->getVar('jumlah_bayar');
         $jumbar = str_replace('.', '', $jumlah);
@@ -194,12 +250,16 @@ class Pembayaran extends BaseController
         $apa = $sppmodel['nominal'];
         $lebih_jumbar = NULL;
         $kurang_jumbar = NULL;
+
         if ($jumbar >= $apa) {
             $lebih_jumbar = $jumbar - $apa;
         }
         if ($jumbar <= $apa) {
             $kurang_jumbar = $apa - $jumbar;
         }
+
+
+
         $nilai = [
             'nisn' => $this->request->getVar('nisn'),
             'nominal_lebih' => $lebih_jumbar,

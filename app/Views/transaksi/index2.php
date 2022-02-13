@@ -24,7 +24,7 @@
             <input type="hidden" name="id_pembayaran" value="<?= old('id_pembayaran'); ?>">
         </div>
         <div class="form-group">
-            <label for="nisn">Nama Siswa</label>
+            <label for="nisn">NISN Siswa</label>
             <input type="text" name="nisn" class="form-control" id="nisn" value="<?= $nisn['nisn']; ?>" placeholder="tulis Tanggal bayar anda" readonly>
 
         </div>
@@ -59,7 +59,7 @@
             <div class="input-group-prepend">
                 <label class="input-group-text" for="bln_bayar">Bulan Bayar</label>
             </div>
-            <select class="selectpicker border <?= ($validation->hasError('bln_bayar')) ? 'is-invalid' : ''; ?>" data-width="100%" id="bln_bayar" name="bln_bayar" value="<?= old('bln_bayar'); ?>" value="<?= old('bln_bayar'); ?>" data-live-search="true" title="Bulan Bayar">
+            <select class="selectpicker border <?= ($validation->hasError('bln_bayar')) ? 'is-invalid' : ''; ?>" data-width="100%" id="bln_bayar" name="bln_bayar"" value=" <?= old('bln_bayar'); ?>" data-live-search="true" title="Bulan Bayar">
                 <?php foreach ($bulan as $b) : ?>
                     <option value="<?= $b['bulan_bayar']; ?>"> <?= $b['bulan_bayar']; ?> </option>
                 <?php endforeach; ?>
@@ -78,7 +78,7 @@
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="id_spp">Nominal SPP</label>
+                <label class="input-group-text" for="id_spp">Bulan Bayar</label>
             </div>
             <select class="selectpicker border <?= ($validation->hasError('id_spp')) ? 'is-invalid' : ''; ?>" data-width="100%" id="id_spp" name="id_spp"" value=" <?= old('id_spp'); ?>" title="Bulan Bayar">
 
@@ -88,21 +88,6 @@
             <div class="invalid-feedback">
                 <?= $validation->getError('id_spp'); ?>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="nominal_lebih">Nominal Lebih</label>
-            <input type="text" name="nominal_lebih" class="form-control <?= ($validation->hasError('nominal_lebih')) ? 'is-invalid' : ''; ?> " id="nominal_lebih" value="<?= $nilai_lebih; ?>" placeholder="0" readonly>
-
-        </div>
-        <div class="form-group">
-            <label for="nominal_kurang">Nominal Kurang</label>
-            <input type="text" name="nominal_kurang" class="form-control <?= ($validation->hasError('nominal_kurang')) ? 'is-invalid' : ''; ?> " id="nominal_kurang" value="<?= $nilai_kurang; ?>" placeholder="0" readonly>
-
-        </div>
-        <div class="form-group">
-            <label for="di_bayar">Yang Harus Dibayar</label>
-            <input type="text" name="di_bayar" class="form-control <?= ($validation->hasError('di_bayar')) ? 'is-invalid' : ''; ?> " id="di_bayar" value="<?= $nominal_bayar; ?>" placeholder="" readonly>
-
         </div>
         <div class="form-group">
             <label for="jumlah_bayar">Jumlah Bayar</label>
