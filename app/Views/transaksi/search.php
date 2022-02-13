@@ -14,7 +14,7 @@
     <?= $this->extend('templates/index'); ?>
 
     <?= $this->section('page-content'); ?>
-    <h1 class="mt-2" style="text-align: center;">Search Berdasarkan Siswa</h1>
+    <h1 class="mt-2" style="text-align: center;">Search Siswa Untuk Transaksi</h1>
 
 
 
