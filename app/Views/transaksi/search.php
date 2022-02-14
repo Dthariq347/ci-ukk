@@ -19,10 +19,8 @@
 
 
     <form action="/pembayaran/index" method="get" style="padding: 20px;" enctype="multipart/form-data">
-        <?= csrf_field(); ?>
-        <div class="col-sm-10">
-            <input type="hidden" name="id_pembayaran" value="<?= old('id_pembayaran'); ?>">
-        </div>
+
+
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="nisn">Fullname Siswa</label>

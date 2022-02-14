@@ -78,11 +78,11 @@
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="id_spp">Bulan Bayar</label>
+                <label class="input-group-text" for="id_spp">Nominal SPP</label>
             </div>
             <select class="selectpicker border <?= ($validation->hasError('id_spp')) ? 'is-invalid' : ''; ?>" data-width="100%" id="id_spp" name="id_spp"" value=" <?= old('id_spp'); ?>" title="Bulan Bayar">
 
-                <option selected value="<?= $id_spp; ?>"> <?= $nominal; ?> </option>
+                <option selected data-subtext="(<?= $tahun; ?>)" value="<?= $id_spp; ?>"> <?= $nominal; ?> </option>
 
             </select>
             <div class="invalid-feedback">

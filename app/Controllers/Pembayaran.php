@@ -26,26 +26,24 @@ class Pembayaran extends BaseController
 
     public function index()
     {
+        // mencari data yang search awal
         $search = $this->request->getVar('nisn');
+        // mencari data yang search pada model siswa
         $carisiswa = $this->SiswaModel->find($search);
 
+        // mencari data apakah pada yang disearch ada nilai lebih or kurang 
         $nilai = $this->NilaiModel->where('nisn', $search)->find();
 
+        // mencari data di model SPP 
         $tahun = date('Y');
         $date = $this->SppModel->where('tahun', $tahun)->find();
 
-
+        // untuk tampilan dan value SPP 
         $id_spp = $date[0]['id_spp'];
         $nominal = $date[0]['nominal'];
+        $tahun = $date[0]['tahun'];
 
-        // $nilai_lebih = $nilai[0]['nominal_lebih'];
-        // $nilai_kurang = $nilai[0]['nominal_kurang'];
-
-
-
-
-
-
+        // ketika nisn yang di cari pada model nilai == null munculin bawahnya
         if ($nilai == NULL) {
             $data = [
                 'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
@@ -53,6 +51,7 @@ class Pembayaran extends BaseController
                 'home' => $this->PembayaranModel->getPembayaran(),
                 'id_spp' => $id_spp,
                 'nominal' => $nominal,
+                'tahun' => $tahun,
                 'nisn' => $carisiswa,
                 'bulan' => $this->BulanModel->getBulan(),
                 'status' => $this->StatusModel->getstatus(),
@@ -76,16 +75,27 @@ class Pembayaran extends BaseController
             $data['name'] = $query2->getResultArray();
             return view('/transaksi/index2', $data);
         } else {
+            // ketika nisn yang di cari pada model nilai != null munculin bawahnya
             if ($nilai[0]['nisn'] != NULL) {
+
                 $nilai_lebih = $nilai[0]['nominal_lebih'];
                 $nilai_kurang = $nilai[0]['nominal_kurang'];
-                if ($nominal - $nilai_lebih) {
+
+                // $sama = $nilai_lebih == $nilai_kurang
+                $bayar_nominal_lebih = $nominal - $nilai_lebih;
+                $bayar_nominal_kurang = $nominal + $nilai_kurang;
+
+
+                if ($bayar_nominal_lebih && $nilai_kurang == NULL) {
                     $nominal_bayar = $nominal - $nilai_lebih;
+                } elseif ($bayar_nominal_kurang && $nilai_lebih == NULL) {
+                    $nominal_bayar = $nominal + $nilai_kurang;
                 } else {
-                    if ($nominal + $nilai_kurang) {
-                        $nominal_bayar = $nominal + $nilai_kurang;
-                    }
+                    $nominal_bayar = NULL;
                 }
+
+
+
 
                 $data = [
                     'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
@@ -191,8 +201,8 @@ class Pembayaran extends BaseController
     }
     public function savepembayaran()
     {
-        $id_nilai = $this->NilaiModel->where('nisn', $this->request->getVar('nisn'))->find();
 
+        $search = $this->request->getVar('nisn');
 
         $jumlah = $this->request->getVar('jumlah_bayar');
         $jumbar = str_replace('.', '', $jumlah);
@@ -228,7 +238,7 @@ class Pembayaran extends BaseController
         ])) {
             // $validation = \Config\Services::validation();
             // return redirect()->to('/home/contact/')->withInput()->with('validation', $validation);
-            return redirect()->to('/pembayaran/index/')->withInput();
+            return redirect()->to('/pembayaran/index?nisn=' . $search)->withInput();
         }
 
 
@@ -245,6 +255,9 @@ class Pembayaran extends BaseController
             'id_status' => $this->request->getVar('id_status')
 
         ]);
+
+
+
 
         $sppmodel = $this->SppModel->find($this->request->getVar('id_spp'));
         $apa = $sppmodel['nominal'];
@@ -267,6 +280,47 @@ class Pembayaran extends BaseController
 
         ];
         $this->NilaiModel->insert($nilai);
+
+        // $id_nilai = $this->NilaiModel->where('nisn', $this->request->getVar('nisn'))->find();
+
+
+        // $tahun = date('Y');
+        // $date = $this->SppModel->where('tahun', $tahun)->find();
+
+        // $nominal = $date[0]['nominal'];
+        // $tahun = $date[0]['tahun'];
+
+        // $nilai_lebih = $nilai['nominal_lebih'];
+        // $nilai_kurang = $nilai['nominal_kurang'];
+
+        // $bayar_nominal_lebih = $nominal - $nilai_lebih;
+        // $bayar_nominal_kurang = $nominal + $nilai_kurang;
+
+        // if ($bayar_nominal_lebih && $nilai_kurang == NULL) {
+        //     $nominal_bayar = $nominal - $nilai_lebih;
+        // } elseif ($bayar_nominal_kurang && $nilai_lebih == NULL) {
+        //     $nominal_bayar = $nominal + $nilai_kurang;
+        // } else {
+        //     $nominal_bayar = NULL;
+        // }
+
+        // $jumlah_lebih = NULL;
+        // $jumlah_kurang = NULL;
+
+        // if ($jumbar > $nominal_bayar) {
+        //     $jumlah_lebih = $jumbar - $nominal_bayar;
+        // }
+        // if ($jumbar < $nominal_bayar) {
+        //     $jumlah_kurang = $jumbar - $nominal_bayar;
+        // }
+
+        // $this->NilaiModel->save([
+        //     'id_nilai' => $id_nilai['id_nilai'],
+        //     'nominal_lebih' => $jumlah_lebih,
+        //     'nominal_kurang' => $jumlah_kurang
+
+        // ]);
+
         // $spp = $this->PembayaranModel->save(['id_spp' => $this->request->getVar('id_spp')]);
 
         // if ($spp >= $jumlah_bayarr) {
