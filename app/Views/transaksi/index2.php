@@ -49,7 +49,6 @@
             </select>
         </div>
 
-
         <div class="form-group">
             <label for="tgl_bayar">Tanggal bayar</label>
             <input type="number" min="1" max="31" name="tgl_bayar" class="form-control" id="tgl_bayar" value="<?= old('tgl_bayar'); ?>" placeholder="tulis Tanggal bayar anda">
