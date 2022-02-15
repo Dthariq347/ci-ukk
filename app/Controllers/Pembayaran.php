@@ -91,7 +91,7 @@ class Pembayaran extends BaseController
                 } elseif ($bayar_nominal_kurang && $nilai_lebih == NULL) {
                     $nominal_bayar = $nominal + $nilai_kurang;
                 } else {
-                    $nominal_bayar = NULL;
+                    $nominal_bayar = $nominal;
                 }
 
 
@@ -315,6 +315,16 @@ class Pembayaran extends BaseController
                 }
                 if ($jumbar < $nominal_bayar) {
                     $jumlah_kurang = $nominal_bayar - $jumbar;
+                }
+
+                if ($jumlah_lebih && $jumlah_kurang) {
+                    if ($jumbar >= $nominal_bayar) {
+                        $jumlah_lebih = $jumbar - $nominal_bayar;
+                    }
+                } else {
+                    if ($jumbar <= $nominal_bayar) {
+                        $jumlah_kurang = $nominal_bayar - $jumbar;
+                    }
                 }
 
                 $this->NilaiModel->save([

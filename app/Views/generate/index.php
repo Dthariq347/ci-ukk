@@ -110,7 +110,7 @@
                                     </td>
                                 <?php else : ?>
                                     <td>
-                                        <button class="btn btn-danger">belum lunas</button>
+                                        <button class="btn btn-warning">belum lunas</button>
                                     </td>
                                 <?php endif; ?>
                                 <td><?php echo $a['jumlah_bayar'] ?></td>

@@ -96,7 +96,7 @@
         </li>
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="/Pembayaran/index">
+            <a class="nav-link" href="/Pembayaran/search">
                 <i class="fas fa-bookmark"></i>
                 <span>Input Transaksi</span></a>
         </li>
