@@ -314,7 +314,7 @@ class Pembayaran extends BaseController
                     $jumlah_lebih = $jumbar - $nominal_bayar;
                 }
                 if ($jumbar < $nominal_bayar) {
-                    $jumlah_kurang = $jumbar - $nominal_bayar;
+                    $jumlah_kurang = $nominal_bayar - $jumbar;
                 }
 
                 $this->NilaiModel->save([
