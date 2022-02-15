@@ -256,70 +256,80 @@ class Pembayaran extends BaseController
 
         ]);
 
+        $search = $this->request->getVar('nisn');
+        $nilai = $this->NilaiModel->where('nisn', $search)->find();
+
+        if ($nilai == NULL) {
+            $sppmodel = $this->SppModel->find($this->request->getVar('id_spp'));
+            $apa = $sppmodel['nominal'];
+            $lebih_jumbar = NULL;
+            $kurang_jumbar = NULL;
+
+            if ($jumbar >= $apa) {
+                $lebih_jumbar = $jumbar - $apa;
+            }
+            if ($jumbar <= $apa) {
+                $kurang_jumbar = $apa - $jumbar;
+            }
 
 
 
-        $sppmodel = $this->SppModel->find($this->request->getVar('id_spp'));
-        $apa = $sppmodel['nominal'];
-        $lebih_jumbar = NULL;
-        $kurang_jumbar = NULL;
+            $nilai = [
+                'nisn' => $this->request->getVar('nisn'),
+                'nominal_lebih' => $lebih_jumbar,
+                'nominal_kurang' => $kurang_jumbar
 
-        if ($jumbar >= $apa) {
-            $lebih_jumbar = $jumbar - $apa;
+            ];
+            $this->NilaiModel->insert($nilai);
+        } else {
+            // ketika nisn yang di cari pada model nilai != null munculin bawahnya
+            if ($nilai[0]['nisn'] != NULL) {
+                $id_nilai = $this->NilaiModel->where('nisn', $this->request->getVar('nisn'))->find();
+
+
+                $tahun = date('Y');
+                $date = $this->SppModel->where('tahun', $tahun)->find();
+
+                $nominal = $date[0]['nominal'];
+                $tahun = $date[0]['tahun'];
+
+                $nilai_lebih = $nilai[0]['nominal_lebih'];
+                $nilai_kurang = $nilai[0]['nominal_kurang'];
+
+                $bayar_nominal_lebih = $nominal - $nilai_lebih;
+                $bayar_nominal_kurang = $nominal + $nilai_kurang;
+
+                if ($bayar_nominal_lebih && $nilai_kurang == NULL) {
+                    $nominal_bayar = $nominal - $nilai_lebih;
+                } elseif ($bayar_nominal_kurang && $nilai_lebih == NULL) {
+                    $nominal_bayar = $nominal + $nilai_kurang;
+                } else {
+                    $nominal_bayar = NULL;
+                }
+
+                $jumlah_lebih = NULL;
+                $jumlah_kurang = NULL;
+
+                if ($jumbar > $nominal_bayar) {
+                    $jumlah_lebih = $jumbar - $nominal_bayar;
+                }
+                if ($jumbar < $nominal_bayar) {
+                    $jumlah_kurang = $jumbar - $nominal_bayar;
+                }
+
+                $this->NilaiModel->save([
+                    'id_nilai' => $id_nilai[0]['id_nilai'],
+                    'nominal_lebih' => $jumlah_lebih,
+                    'nominal_kurang' => $jumlah_kurang
+
+                ]);
+            }
         }
-        if ($jumbar <= $apa) {
-            $kurang_jumbar = $apa - $jumbar;
-        }
 
 
 
-        $nilai = [
-            'nisn' => $this->request->getVar('nisn'),
-            'nominal_lebih' => $lebih_jumbar,
-            'nominal_kurang' => $kurang_jumbar
-
-        ];
-        $this->NilaiModel->insert($nilai);
-
-        // $id_nilai = $this->NilaiModel->where('nisn', $this->request->getVar('nisn'))->find();
 
 
-        // $tahun = date('Y');
-        // $date = $this->SppModel->where('tahun', $tahun)->find();
-
-        // $nominal = $date[0]['nominal'];
-        // $tahun = $date[0]['tahun'];
-
-        // $nilai_lebih = $nilai['nominal_lebih'];
-        // $nilai_kurang = $nilai['nominal_kurang'];
-
-        // $bayar_nominal_lebih = $nominal - $nilai_lebih;
-        // $bayar_nominal_kurang = $nominal + $nilai_kurang;
-
-        // if ($bayar_nominal_lebih && $nilai_kurang == NULL) {
-        //     $nominal_bayar = $nominal - $nilai_lebih;
-        // } elseif ($bayar_nominal_kurang && $nilai_lebih == NULL) {
-        //     $nominal_bayar = $nominal + $nilai_kurang;
-        // } else {
-        //     $nominal_bayar = NULL;
-        // }
-
-        // $jumlah_lebih = NULL;
-        // $jumlah_kurang = NULL;
-
-        // if ($jumbar > $nominal_bayar) {
-        //     $jumlah_lebih = $jumbar - $nominal_bayar;
-        // }
-        // if ($jumbar < $nominal_bayar) {
-        //     $jumlah_kurang = $jumbar - $nominal_bayar;
-        // }
-
-        // $this->NilaiModel->save([
-        //     'id_nilai' => $id_nilai['id_nilai'],
-        //     'nominal_lebih' => $jumlah_lebih,
-        //     'nominal_kurang' => $jumlah_kurang
-
-        // ]);
 
         // $spp = $this->PembayaranModel->save(['id_spp' => $this->request->getVar('id_spp')]);
 
