@@ -169,13 +169,25 @@
             <!-- Header -->
             <div class="content content-top">
                 <div class="row push">
-                    <div class="col-md d-md-flex align-items-md-center text-center">
-                        <h1 class="mb-0">PROFILE SISWA</h1>
-                    </div>
-                    <div class="col-md d-md-flex align-items-md-center justify-content-md-end text-center">
-                        <a href="<?= base_url('siswa'); ?>" class="btn btn-success btn-outline-success">
-                            <i class="fa fa-arrow-circle-left mr-5"></i>Back to dashboard </a>
-                    </div>
+                    <?php if (in_groups('siswa')) : ?>
+                        <div class="col-md d-md-flex align-items-md-center text-center">
+                            <h1 class="mb-0">PROFILE SISWA</h1>
+                        </div>
+                        <div class="col-md d-md-flex align-items-md-center justify-content-md-end text-center">
+                            <a href="<?= base_url('siswa'); ?>" class="btn btn-success btn-outline-success">
+                                <i class="fa fa-arrow-circle-left mr-5"></i>Back to dashboard </a>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (in_groups('petugas')) : ?>
+                        <div class="col-md d-md-flex align-items-md-center text-center">
+                            <h1 class="mb-0">PROFILE PETUGAS</h1>
+                        </div>
+                        <div class="col-md d-md-flex align-items-md-center justify-content-md-end text-center">
+                            <a href="<?= base_url('petugas'); ?>" class="btn btn-success btn-outline-success">
+                                <i class="fa fa-arrow-circle-left mr-5"></i>Back to dashboard </a>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
             </div>
             <!-- END Header -->
@@ -220,15 +232,28 @@
                                                 </div>
 
                                             </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Username Siswa</label>
-                                                <div class="col-lg-8">
-                                                    <div class="input-group input-group-lg">
-                                                        <input type="text" class="form-control input-lg" value="<?= user()->username; ?>" readonly>
+                                            <?php if (in_groups('siswa')) : ?>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Username Siswa</label>
+                                                    <div class="col-lg-8">
+                                                        <div class="input-group input-group-lg">
+                                                            <input type="text" class="form-control input-lg" value="<?= user()->username; ?>" readonly>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                            </div>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if (in_groups('petugas')) : ?>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label text-right d-none d-sm-block">Username Petugas</label>
+                                                    <div class="col-lg-8">
+                                                        <div class="input-group input-group-lg">
+                                                            <input type="text" class="form-control input-lg" value="<?= user()->username; ?>" readonly>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            <?php endif; ?>
                                             <form action="/details/savepassword/<?= user()->id; ?>" method="post" style="padding: 20px;" enctype="multipart/form-data">
 
                                                 <?= csrf_field(); ?>

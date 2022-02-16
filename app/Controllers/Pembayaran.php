@@ -175,6 +175,7 @@ class Pembayaran extends BaseController
                     ->join('siswa', 'siswa.nisn = pembayaran.nisn')
                     ->join('spp', 'spp.id_spp = pembayaran.id_spp')
                     ->join('status', 'status.id_status = pembayaran.id_status')
+                    ->where('pembayaran.id', user()->id)
                     ->orderBy('id_pembayaran', 'ASC')
                     ->paginate(3, 'pembayaran'),
                 'pager' => $this->PembayaranModel->pager,
