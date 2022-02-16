@@ -23,10 +23,18 @@
         <div class="col-sm-10">
             <input type="hidden" name="id_pembayaran" value="<?= old('id_pembayaran'); ?>">
         </div>
-        <div class="form-group">
-            <label for="nisn">Nama Siswa</label>
-            <input type="text" name="nisn" class="form-control" id="nisn" value="<?= $nisn['nisn']; ?>" placeholder="tulis Tanggal bayar anda" readonly>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="nisn">Nama Siswa</label>
+            </div>
+            <select class="selectpicker border <?= ($validation->hasError('nisn')) ? 'is-invalid' : ''; ?>" data-width="100%" id="nisn" name="nisn"" value=" <?= old('nisn'); ?>" title="Bulan Bayar">
 
+                <option selected value="<?= $nisn['nisn']; ?>"> <?= $nisn['nama']; ?> </option>
+
+            </select>
+            <div class="invalid-feedback">
+                <?= $validation->getError('id_spp'); ?>
+            </div>
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
