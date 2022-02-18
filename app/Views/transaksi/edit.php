@@ -20,24 +20,25 @@
     <form action="/pembayaran/updatepembayaran/<?= $home['id_pembayaran']; ?>" method="post" style="padding: 20px;" enctype="multipart/form-data">
 
         <input type="hidden" name="id_kelas" value="<?= $home['id_pembayaran']; ?>">
+
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="id">Nama Petugas</label>
             </div>
             <select class="selectpicker border" data-width="100%" id="id" name="id" data-live-search="true">
-                <?php foreach ($users as $s) : ?>
-                    <option value="<?= $s['id_user']; ?>" <?= ($s['id_user'] == old('id') || ($home['id'] == $s['id_user'])) ? 'selected' : '' ?>> <?= $s['username']; ?> </option>
-                <?php endforeach; ?>
+
+                <option value="<?= $users[0]['id_user']; ?>"><?= $users[0]['username']; ?> </option>
+
             </select>
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="siswa">Nama Siswa</label>
+                <label class="input-group-text" for="siswa">Username Siswa</label>
             </div>
             <select class="selectpicker border " data-width="100%" id="siswa" name="siswa" data-live-search="true">
-                <?php foreach ($name as $s) : ?>
-                    <option value="<?= $s['id_user']; ?>" <?= ($s['id_user'] == old('siswa') || ($home['siswa'] == $s['id_user'])) ? 'selected' : '' ?>> <?= $s['username']; ?> </option>
-                <?php endforeach; ?>
+
+                <option data-subtext="(<?= $name[0]['fullname']; ?>)" value="<?= $name[0]['id_user']; ?>"> <?= $name[0]['username']; ?> </option>
+
             </select>
         </div>
         <div class="input-group mb-3">
@@ -45,19 +46,7 @@
                 <label class="input-group-text" for="nisn">Fullname Siswa</label>
             </div>
             <select class="selectpicker border " data-width="100%" id="nisn" name="nisn" data-live-search="true">
-                <?php foreach ($nisn as $s) : ?>
-                    <option value="<?= $s['nisn']; ?>" <?= ($s['nisn'] == old('nisn') || ($home['nisn'] == $s['nisn'])) ? 'selected' : '' ?>> <?= $s['nama']; ?> </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="nisn">Fullname Siswa</label>
-            </div>
-            <select class="selectpicker border " data-width="100%" id="nisn" name="nisn" data-live-search="true">
-                <?php foreach ($nisn as $s) : ?>
-                    <option value="<?= $s['nisn']; ?>" <?= ($s['nisn'] == old('nisn') || ($home['nisn'] == $s['nisn'])) ? 'selected' : '' ?>> <?= $s['nama']; ?> </option>
-                <?php endforeach; ?>
+                <option value="<?= $nisn[0]['nisn']; ?>" <?= ($nisn[0]['nisn'] == old('nisn') || ($home['nisn'] == $nisn[0]['nisn'])) ? 'selected' : '' ?>> <?= $nisn[0]['nama']; ?> </option>
             </select>
         </div>
         <div class="form-group">
@@ -70,7 +59,7 @@
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="bln_bayar">Nama Siswa</label>
+                <label class="input-group-text" for="bln_bayar">Bulan Bayar</label>
             </div>
             <select class="selectpicker border " data-width="100%" id="bln_bayar" name="bln_bayar" data-live-search="true">
                 <?php foreach ($bulan as $s) : ?>
@@ -88,18 +77,22 @@
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="id_spp">Fullname Siswa</label>
+                <label class="input-group-text" for="id_spp">Nominal SPP</label>
             </div>
-            <select class="selectpicker border " data-width="100%" id="id_spp" name="id_spp" data-live-search="true">
-                <?php foreach ($spp as $s) : ?>
-                    <option value="<?= $s['id_spp']; ?>" <?= ($s['id_spp'] == old('id_spp') || ($home['id_spp'] == $s['id_spp'])) ? 'selected' : '' ?>> <?= $s['nominal']; ?> </option>
-                <?php endforeach; ?>
+            <select class="selectpicker border <?= ($validation->hasError('id_spp')) ? 'is-invalid' : ''; ?>" data-width="100%" id="id_spp" name="id_spp"" value=" <?= old('id_spp'); ?>" title="Bulan Bayar">
+
+                <option selected data-subtext="(<?= $tahun; ?>)" value="<?= $id_spp; ?>" <?= ($id_spp == old('id_spp') || ($home['id_spp'] == $id_spp)) ? 'selected' : '' ?>> <?= $nominal; ?> </option>
+
             </select>
+            <div class="invalid-feedback">
+                <?= $validation->getError('id_spp'); ?>
+            </div>
         </div>
 
+
         <div class="form-group">
-            <label for="jumlah_bayar">kopetensi keahlian</label>
-            <input type="text" name="jumlah_bayar" class="form-control <?= ($validation->hasError('jumlah_bayar')) ? 'is-invalid' : ''; ?> " id="jumlah_bayar" value="<?= (old('jumlah_bayar')) ? old('jumlah_bayar') : $home['jumlah_bayar']; ?>" placeholder="First name">
+            <label for="jumlah_bayar">Jumlah Bayar</label>
+            <input type="text" name="jumlah_bayar" class="form-control <?= ($validation->hasError('jumlah_bayar')) ? 'is-invalid' : ''; ?> " id="jumlah_bayar" value="<?= (old('jumlah_bayar')) ? old('jumlah_bayar') : $home['jumlah_bayar']; ?>" placeholder="First name" readonly>
             <div class="invalid-feedback">
                 <?= $validation->getError('jumlah_bayar'); ?>
             </div>
@@ -107,7 +100,7 @@
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="id_status">Fullname Siswa</label>
+                <label class="input-group-text" for="id_status">Status Pembayaran</label>
             </div>
             <select class="selectpicker border " data-width="100%" id="id_status" name="id_status" data-live-search="true">
                 <?php foreach ($status as $s) : ?>

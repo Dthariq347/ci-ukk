@@ -29,8 +29,8 @@
             </div>
             <select class="selectpicker border <?= ($validation->hasError('nisn')) ? 'is-invalid' : ''; ?>" data-width="100%" id="nisn" name="nisn"" value=" <?= old('nisn'); ?>" title="Bulan Bayar">
 
-                <option selected value="<?= $nisn['nisn']; ?>"> <?= $nisn['nama']; ?> </option>
-
+                <option selected value="<?= $nisn['nisn']; ?>">(<?= $nisn['nis']; ?>) <?= $nisn['nama']; ?> </option>
+                ()
             </select>
             <div class="invalid-feedback">
                 <?= $validation->getError('id_spp'); ?>

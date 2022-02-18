@@ -84,7 +84,7 @@ class generate extends BaseController
                     ->join('kelas', 'kelas.id_kelas = siswa.id_kelas')
                     ->where('bln_bayar =', $bln_bayar)
                     ->where('thn_bayar =', $thn_bayar)
-                    ->paginate(50, 'pembayaran'),
+                    ->findAll(),
 
                 'pager' => $this->PembayaranModel->pager,
 
@@ -117,7 +117,7 @@ class generate extends BaseController
                     ->join('spp', 'spp.id_spp = pembayaran.id_spp')
                     ->join('kelas', 'kelas.id_kelas = siswa.id_kelas')
                     ->where('bln_bayar =', $bln_bayar)
-                    ->paginate(50, 'pembayaran'),
+                    ->findAll(),
 
                 'pager' => $this->PembayaranModel->pager,
 

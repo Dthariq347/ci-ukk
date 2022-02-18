@@ -15,6 +15,7 @@ class Pembayaran extends BaseController
     public function search()
     {
 
+
         $data = [
             'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
             'validation' => \Config\Services::validation(),
@@ -356,13 +357,31 @@ class Pembayaran extends BaseController
     public function editpembayaran($pembayaran)
     {
 
+        $search = $this->request->getVar('nisn');
+        // mencari data yang search pada model siswa
+        $carisiswa = $this->SiswaModel->find($search);
+
+
+        // mencari data di model SPP 
+        $tahun = date('Y');
+        $date = $this->SppModel->where('tahun', $tahun)->find();
+
+
+
+        // untuk tampilan dan value SPP 
+        $id_spp = $date[0]['id_spp'];
+        $nominal = $date[0]['nominal'];
+        $tahun = $date[0]['tahun'];
+
 
         $data = [
             'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
             'validation' => \Config\Services::validation(),
             'home' => $this->PembayaranModel->getPembayaran($pembayaran),
-            'spp' => $this->SppModel->getspp(),
-            'nisn' => $this->SiswaModel->getSiswa(),
+            'id_spp' => $id_spp,
+            'nisn' => $carisiswa,
+            'nominal' => $nominal,
+            'tahun' => $tahun,
             'bulan' => $this->BulanModel->getBulan(),
             'status' => $this->StatusModel->getstatus(),
         ];
@@ -401,9 +420,10 @@ class Pembayaran extends BaseController
                 ]
             ],
             'bln_bayar' => [
-                'rules' => 'required',
+                'rules' => 'required|is_unique[pembayaran.bln_bayar]',
                 'errors' => [
                     'required' => '{field}  wajib di isi!!',
+                    'is_unique' => '{field}  tanggal ini sudah bayar!!',
                 ]
             ],
             'thn_bayar' => [
