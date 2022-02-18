@@ -41,7 +41,8 @@
                 <label class="input-group-text" for="id">Nama Petugas</label>
             </div>
             <select class="selectpicker border " data-width="100%" id="id" name="id" value="<?= old('id'); ?>" value="<?= old('id'); ?>" data-live-search="true" title="Nama Petugas....">
-                <?php foreach ($users as $s) : ?>
+                <?php
+                foreach ($users as $s) : ?>
                     <option value="<?= $s['id_user']; ?>"> <?= $s['username']; ?> </option>
                 <?php endforeach; ?>
             </select>

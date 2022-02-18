@@ -14,6 +14,7 @@ class Home extends BaseController
         $data = [
             'title' => 'Index | MTSN 3 Jakarta Selatan',
         ];
+
         return view('main/index', $data);
     }
     public function admin()
