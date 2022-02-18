@@ -176,7 +176,6 @@ class Pembayaran extends BaseController
                     ->join('siswa', 'siswa.nisn = pembayaran.nisn')
                     ->join('spp', 'spp.id_spp = pembayaran.id_spp')
                     ->join('status', 'status.id_status = pembayaran.id_status')
-                    ->where('pembayaran.id', user()->id)
                     ->orderBy('id_pembayaran', 'ASC')
                     ->paginate(3, 'pembayaran'),
                 'pager' => $this->PembayaranModel->pager,
@@ -366,9 +365,7 @@ class Pembayaran extends BaseController
             'title' => 'create (siswa) | MTSN 3 Jakarta Selatan',
             'validation' => \Config\Services::validation(),
             'home' => $this->PembayaranModel->getPembayaran($pembayaran),
-            'id_spp' => $id_spp,
-            'nominal' => $nominal,
-            'tahun' => $tahun,
+            'spp' => $this->SppModel->getspp(),
             'nisn' => $this->SiswaModel->getSiswa(),
             'bulan' => $this->BulanModel->getBulan(),
             'status' => $this->StatusModel->getstatus(),
