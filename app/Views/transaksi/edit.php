@@ -37,8 +37,8 @@
             </div>
             <select class="selectpicker border " data-width="100%" id="siswa" name="siswa" data-live-search="true">
 
-                <option data-subtext="(<?= $name[0]['fullname']; ?>)" value="<?= $name[0]['id_user']; ?>"> <?= $name[0]['username']; ?> </option>
 
+                <option data-subtext="(<?= $name[0]['fullname']; ?>)" value="<?= $name[0]['id_user']; ?>" <?= ($name[0]['id_user'] == old('siswa') || ($home['siswa'] == $name[0]['id_user'])) ? 'selected' : '' ?>> <?= $name[0]['username']; ?> </option>
             </select>
         </div>
         <div class="input-group mb-3">
@@ -92,10 +92,13 @@
 
         <div class="form-group">
             <label for="jumlah_bayar">Jumlah Bayar</label>
-            <input type="text" name="jumlah_bayar" class="form-control <?= ($validation->hasError('jumlah_bayar')) ? 'is-invalid' : ''; ?> " id="jumlah_bayar" value="<?= (old('jumlah_bayar')) ? old('jumlah_bayar') : $home['jumlah_bayar']; ?>" placeholder="First name" readonly>
-            <div class="invalid-feedback">
-                <?= $validation->getError('jumlah_bayar'); ?>
-            </div>
+            <<<<<<< HEAD <input type="text" name="jumlah_bayar" class="form-control <?= ($validation->hasError('jumlah_bayar')) ? 'is-invalid' : ''; ?> " id="jumlah_bayar" value="<?= (old('jumlah_bayar')) ? old('jumlah_bayar') : $home['jumlah_bayar']; ?>" placeholder="First name" readonly>
+                =======
+                <input type="text" name="jumlah_bayar" class="form-control <?= ($validation->hasError('jumlah_bayar')) ? 'is-invalid' : ''; ?> " id="jumlah_bayar" value="<?= (old('jumlah_bayar')) ? old('jumlah_bayar') : $home['jumlah_bayar']; ?>" placeholder="First name">
+                >>>>>>> d4fce11b3feb0436ab6ca5e1852935f3d44c549b
+                <div class="invalid-feedback">
+                    <?= $validation->getError('jumlah_bayar'); ?>
+                </div>
 
         </div>
         <div class="input-group mb-3">
