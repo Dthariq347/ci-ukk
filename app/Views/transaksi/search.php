@@ -14,7 +14,8 @@
     <?= $this->extend('templates/index'); ?>
 
     <?= $this->section('page-content'); ?>
-    <h1 class="mt-2" style="text-align: center;">Search Siswa Untuk Transaksi</h1>
+    <h1 class="mt-2" style="text-align: center;">Search Siswa Untuk Transaksi</h1><br>
+    <h4 class="mt-2" style="text-align: center;">(Harap cek history pembayaran untuk memastikan terakhir pembayaran siswa)</h4>
 
 
 
