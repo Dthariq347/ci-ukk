@@ -12,20 +12,20 @@ class Admin extends BaseController
     {
         $this->db = \Config\Database::connect();
     }
-    public function index()
-    {
-        // $logout = 	$auth->logout();
-        $data['title'] = 'admin | MTSN 3 Jakarta Selatan';
-        if (!logged_in()) {
-            return view('login/admin', $data);
-        } else {
-            if (in_groups('siswa')) {
-                return redirect()->to('/login/siswa');
-            }
-        }
+    // public function index()
+    // {
+    //     // $logout = 	$auth->logout();
+    //     $data['title'] = 'admin | MTSN 3 Jakarta Selatan';
+    //     if (!logged_in()) {
+    //         return view('login/admin', $data);
+    //     } else {
+    //         if (in_groups('siswa')) {
+    //             return redirect()->to('/login/siswa');
+    //         }
+    //     }
 
-        return view('/admin/index',);
-    }
+    //     return view('/admin/index',);
+    // }
     public function createsiswa()
     {
         $data = [

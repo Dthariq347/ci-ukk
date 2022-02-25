@@ -11,18 +11,30 @@ class Home extends BaseController
     }
     public function index()
     {
-        $data = [
-            'title' => 'Index | MTSN 3 Jakarta Selatan',
-        ];
+        $data['title'] = 'admin | MTSN 3 Jakarta Selatan';
 
-        return view('main/index', $data);
+        if (in_groups('siswa')) {
+            return redirect()->to('/login/siswa');
+        } else {
+            if (in_groups('admin') || in_groups('petugas')) {
+                return redirect()->to('/login/admin');
+            };
+        }
+
+        return view('/main/main', $data);
     }
     public function admin()
     {
+        $data['title'] = 'admin | MTSN 3 Jakarta Selatan';
 
-        $data = [
-            'title' => 'Index | MTSN 3 Jakarta Selatan',
-        ];
-        return view('templates/dashboard', $data);
+        if (in_groups('siswa')) {
+            return redirect()->to('/login/siswa');
+        } else {
+            if (in_groups('admin') || in_groups('petugas')) {
+                return redirect()->to('/login/admin');
+            };
+        }
+
+        return view('/admin/index', $data);
     }
 }

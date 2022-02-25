@@ -39,6 +39,7 @@ a:link {
 .button {
   width: 100%;
   display: flex;
+  justify-content: center;
 }
 .text-siswa {
   width: 50%;
