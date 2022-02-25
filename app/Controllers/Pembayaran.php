@@ -107,6 +107,7 @@ class Pembayaran extends BaseController
                     'id_spp' => $id_spp,
                     'nominal' => $nominal,
                     'nisn' => $carisiswa,
+                    'tahun' => $tahun,
                     'bulan' => $this->BulanModel->getBulan(),
                     'status' => $this->StatusModel->getstatus(),
                     'nilai_lebih' => $nilai_lebih,
@@ -155,8 +156,8 @@ class Pembayaran extends BaseController
                     ->join('siswa', 'siswa.nisn = pembayaran.nisn')
                     ->join('spp', 'spp.id_spp = pembayaran.id_spp')
                     ->join('status', 'status.id_status = pembayaran.id_status')
-                    ->orderBy('id_pembayaran', 'ASC')
-                    ->paginate(3, 'pembayaran'),
+                    ->orderBy('thn_bayar', 'ASC')
+                    ->paginate(5, 'pembayaran'),
                 'pager' => $this->PembayaranModel->pager,
             ];
             return view('histori/read', $data);
@@ -177,7 +178,7 @@ class Pembayaran extends BaseController
                     ->join('spp', 'spp.id_spp = pembayaran.id_spp')
                     ->join('status', 'status.id_status = pembayaran.id_status')
                     ->orderBy('id_pembayaran', 'ASC')
-                    ->paginate(3, 'pembayaran'),
+                    ->paginate(5, 'pembayaran'),
                 'pager' => $this->PembayaranModel->pager,
             ];
             return view('histori/read', $data);
@@ -193,7 +194,7 @@ class Pembayaran extends BaseController
                         ->join('spp', 'spp.id_spp = pembayaran.id_spp')
                         ->where('pembayaran.siswa', user()->id)
                         ->orderBy('id_pembayaran', 'ASC')
-                        ->paginate(3, 'pembayaran'),
+                        ->paginate(5, 'pembayaran'),
                     'pager' => $this->PembayaranModel->pager,
                 ];
                 return view('histori/read', $data);
