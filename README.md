@@ -13,7 +13,7 @@ Project ini di buat untuk melengkapkan ke wajiban di SMK Bina Informatika dalam 
 ## Version History
 
 - 0.1
-  - Initial Release
+  - Initial Release with codeigniter 4
 
 ## License
 
