@@ -104,14 +104,11 @@
                                 <td><?php echo $a['nama_kelas'] ?></td>
                                 <td><?php echo $a['bln_bayar'] ?></td>
                                 <td><?php echo $a['thn_bayar'] ?></td>
-                                <?php if ($a['jumlah_bayar'] >= $a['nominal']) : ?>
-                                    <td>
-                                        <button class="btn btn-success">lunas</button>
-                                    </td>
+                                <?php if ($a['status_pembayaran'] == 'Lunas') : ?>
+                                    <td><button class="btn btn-success"><?= $a['status_pembayaran']; ?></button></td>
+
                                 <?php else : ?>
-                                    <td>
-                                        <button class="btn btn-warning">belum lunas</button>
-                                    </td>
+                                    <td><button class="btn btn-warning"><?= $a['status_pembayaran']; ?></button></td>
                                 <?php endif; ?>
                                 <td><?php echo $a['jumlah_bayar'] ?></td>
                             </tr>
