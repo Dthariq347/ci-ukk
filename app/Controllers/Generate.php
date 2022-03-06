@@ -20,10 +20,11 @@ class generate extends BaseController
             'validation' => \Config\Services::validation(),
             'bulan' => $this->BulanModel->getBulan(),
             'read' => $this->PembayaranModel
-                ->select('nis ,nama, nama_kelas, bln_bayar, thn_bayar, nominal, jumlah_bayar')
+                ->select('nis ,nama, nama_kelas, bln_bayar, thn_bayar, nominal, jumlah_bayar, status_pembayaran')
                 ->join('users', 'users.id = pembayaran.id AND users.id = pembayaran.siswa', 'left')
                 ->join('siswa', 'siswa.nisn = pembayaran.nisn')
                 ->join('spp', 'spp.id_spp = pembayaran.id_spp')
+                ->join('status', 'status.id_status = pembayaran.id_status')
                 ->join('kelas', 'kelas.id_kelas = siswa.id_kelas')
                 ->paginate(3, 'pembayaran'),
             'pager' => $this->PembayaranModel->pager,
@@ -44,10 +45,11 @@ class generate extends BaseController
             $data = [
                 'title' => 'generate laporan (admin) | MTSN 3 Jakarta Selatan',
                 'read' => $this->PembayaranModel
-                    ->select('nis ,nama, nama_kelas, bln_bayar, thn_bayar, nominal, jumlah_bayar')
+                    ->select('nis ,nama, nama_kelas, bln_bayar, thn_bayar, nominal, jumlah_bayar, status_pembayaran')
                     ->join('users', 'users.id = pembayaran.id AND users.id = pembayaran.siswa', 'left')
                     ->join('siswa', 'siswa.nisn = pembayaran.nisn')
                     ->join('spp', 'spp.id_spp = pembayaran.id_spp')
+                    ->join('status', 'status.id_status = pembayaran.id_status')
                     ->join('kelas', 'kelas.id_kelas = siswa.id_kelas')
                     ->orderBy('bln_bayar', 'ASC')
                     ->orderBy('thn_bayar', 'ASC')
@@ -77,10 +79,11 @@ class generate extends BaseController
             $data = [
                 'title' => 'generate laporan (admin) | MTSN 3 Jakarta Selatan',
                 'read' => $this->PembayaranModel
-                    ->select('nis ,nama, nama_kelas, bln_bayar, thn_bayar, nominal, jumlah_bayar')
+                    ->select('nis ,nama, nama_kelas, bln_bayar, thn_bayar, nominal, jumlah_bayar, status_pembayaran')
                     ->join('users', 'users.id = pembayaran.id AND users.id = pembayaran.siswa', 'left')
                     ->join('siswa', 'siswa.nisn = pembayaran.nisn')
                     ->join('spp', 'spp.id_spp = pembayaran.id_spp')
+                    ->join('status', 'status.id_status = pembayaran.id_status')
                     ->join('kelas', 'kelas.id_kelas = siswa.id_kelas')
                     ->where('bln_bayar =', $bln_bayar)
                     ->where('thn_bayar =', $thn_bayar)
@@ -111,10 +114,11 @@ class generate extends BaseController
             $data = [
                 'title' => 'generate laporan (admin) | MTSN 3 Jakarta Selatan',
                 'read' => $this->PembayaranModel
-                    ->select('nis ,nama, nama_kelas, bln_bayar, thn_bayar, nominal, jumlah_bayar')
+                    ->select('nis ,nama, nama_kelas, bln_bayar, thn_bayar, nominal, jumlah_bayar, status_pembayaran')
                     ->join('users', 'users.id = pembayaran.id AND users.id = pembayaran.siswa', 'left')
                     ->join('siswa', 'siswa.nisn = pembayaran.nisn')
                     ->join('spp', 'spp.id_spp = pembayaran.id_spp')
+                    ->join('status', 'status.id_status = pembayaran.id_status')
                     ->join('kelas', 'kelas.id_kelas = siswa.id_kelas')
                     ->where('bln_bayar =', $bln_bayar)
                     ->findAll(),
@@ -144,10 +148,11 @@ class generate extends BaseController
             $data = [
                 'title' => 'generate laporan (admin) | MTSN 3 Jakarta Selatan',
                 'read' => $this->PembayaranModel
-                    ->select('nis ,nama, nama_kelas, bln_bayar, thn_bayar, nominal, jumlah_bayar')
+                    ->select('nis ,nama, nama_kelas, bln_bayar, thn_bayar, nominal, jumlah_bayar, status_pembayaran')
                     ->join('users', 'users.id = pembayaran.id AND users.id = pembayaran.siswa', 'left')
                     ->join('siswa', 'siswa.nisn = pembayaran.nisn')
                     ->join('spp', 'spp.id_spp = pembayaran.id_spp')
+                    ->join('status', 'status.id_status = pembayaran.id_status')
                     ->join('kelas', 'kelas.id_kelas = siswa.id_kelas')
                     ->where('thn_bayar =', $thn_bayar)
                     ->paginate(50, 'pembayaran'),
