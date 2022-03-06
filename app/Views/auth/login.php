@@ -43,11 +43,7 @@
                                 <br>
                                 <button type="submit" class="btn btn-primary btn-success btn-block"><?= lang('Auth.loginAction') ?></button>
 
-                                <div class="text-center">
-                                    <?php if ($config->allowRegistration) : ?>
-                                        <p><a class="small" href="<?= route_to('register') ?>"><?= lang('Auth.needAnAccount') ?></a></p>
-                                    <?php endif; ?>
-                                </div>
+
                         </div>
                         </form>
                     </div>
