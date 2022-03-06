@@ -188,10 +188,11 @@ class Pembayaran extends BaseController
                 $data = [
                     'title' => 'Read | Web Dzabitha',
                     'read' => $this->PembayaranModel
-                        ->select('id_pembayaran ,pembayaran.id as username,  nama, tgl_bayar, bln_bayar, thn_bayar, nominal, jumlah_bayar')
+                        ->select('id_pembayaran ,pembayaran.id as username,  nama, tgl_bayar, bln_bayar, thn_bayar, nominal, jumlah_bayar, status_pembayaran')
                         ->join('users', 'users.id = pembayaran.id AND users.id = pembayaran.siswa', 'left')
                         ->join('siswa', 'siswa.nisn = pembayaran.nisn')
                         ->join('spp', 'spp.id_spp = pembayaran.id_spp')
+                        ->join('status', 'status.id_status = pembayaran.id_status')
                         ->where('pembayaran.siswa', user()->id)
                         ->orderBy('id_pembayaran', 'ASC')
                         ->paginate(5, 'pembayaran'),
